@@ -1,2 +1,10 @@
-# router
-Web Router
+# 構造 - Kōzō
+*(Prounounced "Kouzou"; means "Structure")*
+
+# What is Kozo?
+
+...
+
+# What is Kozo Common ?
+
+...
