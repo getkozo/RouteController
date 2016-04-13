@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit 
+	colors="true" 
+	bootstrap="vendor/autoload.php">
+	
+  <testsuites>
+    <testsuite name="Kozo Common Tests">
+       <directory>./tests/Web/Controller/</directory>
+       <directory>./tests/Web/Router/</directory>
+    </testsuite>
+  </testsuites>
+  
+</phpunit>

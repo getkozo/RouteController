@@ -3,8 +3,8 @@
 
 # What is Kozo?
 
-...
+Componentized PHP Framework - A framework made up of re-usable building blocks.
 
-# What is Kozo Router ?
+# What is Kozo Web ?
 
-...
+Kozo Web contains a router and controller
