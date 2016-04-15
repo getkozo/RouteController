@@ -1,6 +1,6 @@
 {
     "name": "getkozo/webrouter",
-    "description": "Web Router and Controller for the Kozo Framework",
+    "description": "Simple Web Router",
     "license": "MIT",
     "homepage": "http://www.getkozo.com",
     "authors": [
