@@ -1,6 +1,8 @@
 <?php
 namespace Kozo\Web\Router;
 
+use Kozo\Web\Router\KozoRouterInterface;
+
 /**
  * Route
  *
@@ -12,19 +14,19 @@ namespace Kozo\Web\Router;
 class Route
 {
 
+    public static $RESPONSE_APPROACH_GLOBAL_ENV = 0;
+
+    public static $RESPONSE_APPROACH_KOZO_INTERFACE = 1;
+
+    public static $RESPONSE_APPROACH_PSR_HTTP_MESSAGE = 2;
+
     private static $DEFAULT_BASE_PATH = '/';
-
-    private static $RESPONSE_METHOD_GLOBAL_ENV = 0;
-
-    private static $RESPONSE_METHOD_KOZO_INTERFACE = 1;
-
-    private static $RESPONSE_METHOD_PSR_HTTP_MESSAGE = 2;
 
     /**
      *
-     * @var $responseMethod
+     * @var $responseApproach
      */
-    private $responseMethod;
+    private $responseApproach;
 
     /**
      * Unique Id for Route
@@ -35,6 +37,7 @@ class Route
 
     /**
      * Http Methods ie: GET, POST, PUT, PATCH, DELETE .
+     *
      *
      *
      *
@@ -131,7 +134,7 @@ class Route
         if (empty($urlPattern))
             throw new \InvalidArgumentException("Missing or empty urlPattern");
 
-        $responseMethod = self::$RESPONSE_METHOD_GLOBAL_ENV;
+        $this->responseApproach = self::$RESPONSE_APPROACH_GLOBAL_ENV;
 
         $this->isPathMatch = false;
 
@@ -310,6 +313,15 @@ class Route
         return $result;
     }
 
+    public function setAccessApproach($responseApproach)
+    {
+        if ($responseApproach == self::$RESPONSE_APPROACH_GLOBAL_ENV || $responseApproach == self::$RESPONSE_APPROACH_KOZO_INTERFACE || $responseApproach == self::$RESPONSE_APPROACH_PSR_HTTP_MESSAGE) {
+            $this->responseApproach = $responseApproach;
+        } else {
+            throw new \Exception("Invalid response approach");
+        }
+    }
+
     /**
      * Return Route ID
      *
@@ -335,11 +347,20 @@ class Route
 
         if ($this->isMatch($requestPath)) {
 
-            // the only implements stuff _ENV with parameters... todo implement the other 2 approaches
-            $_ENV["KOZO_PARAMETERS"] = $this->parseParameters($requestPath);
-
             // Invoke Class which of course invoke the constructor
             $object = new $this->invokeClass();
+
+            if($this->responseApproach == self::$RESPONSE_APPROACH_KOZO_INTERFACE) {
+
+                if($object instanceof KozoRouterInterface) {
+                    $object->setRequestParameters($this->parseParameters($requestPath));
+                } else {
+                    return false;
+                }
+
+            } else {
+                $_ENV["KOZO_PARAMETERS"] = $this->parseParameters($requestPath);
+            }
 
             // If method is give then invoke the indicated method on the object
             if ($this->invokeMethod != null) {

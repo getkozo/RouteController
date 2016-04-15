@@ -8,18 +8,23 @@ class RouteTest extends PHPUnit_Framework_TestCase
 {
 
     /**
-     * Just a basic unique test
+     * Just a basic unique test, makes 10000 routes and stores ids into an array
+     * each loop checks if the id does inded does not exist in the array otherwise id is
+     * not unique .
+     * .. yes at on point there could be a hash collision but realistically
+     * are you going to have that many routes.
      */
     public function testRouteIdUnique()
     {
-        $_SERVER["REQUEST_METHOD"] = "GET";
-        for ($i = 0; $i < 10000; $i ++) {
+        $identifiers = array();
 
-            $this->assertNotEquals((new Route([
+        $_SERVER["REQUEST_METHOD"] = "GET";
+        for ($i = 0; $i < 10; $i ++) {
+            $id = (new Route([
                 "GET"
-            ], "/", null, null))->getRouteId(), (new Route([
-                "GET"
-            ], "/", 'App\DummyObject'))->getRouteId());
+            ], "/", null, null))->getRouteId();
+            $this->assertEquals(in_array($id, $identifiers), false);
+            $identifiers[] = $id;
         }
     }
 
@@ -132,13 +137,31 @@ class RouteTest extends PHPUnit_Framework_TestCase
         $this->expectOutputString("create user");
     }
 
+    /**
+     * Tests data being return Globally via $_ENV, namely $_ENV["KOZO_PARAMETERS"]
+     */
     public function testFakeUserUpdate()
     {
         $_SERVER["REQUEST_METHOD"] = "PUT";
         $routeUsers = new Route([
             "PUT"
         ], "/users/:number", 'App\User', 'updateUser');
+        $routeUsers->setAccessApproach(Route::$RESPONSE_APPROACH_GLOBAL_ENV);
         $this->assertEquals($routeUsers->execute("/users/48593"), true);
         $this->expectOutputString("update user 48593");
+    }
+
+    /**
+     * Tests data be return through an callback interface 'KozoRouterInterface'
+     */
+    public function testFakeBookUpdateWithKozoRouterInterface()
+    {
+        $_SERVER["REQUEST_METHOD"] = "PUT";
+        $routeUsers = new Route([
+            "PUT"
+        ], "/books/:number", 'App\Books', 'updateBook');
+        $routeUsers->setAccessApproach(Route::$RESPONSE_APPROACH_KOZO_INTERFACE);
+        $this->assertEquals($routeUsers->execute("/books/3467"), true);
+        $this->expectOutputString("update book 3467");
     }
 }

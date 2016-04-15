@@ -3,9 +3,13 @@
 
 [![Build Status](https://travis-ci.org/getkozo/Router.svg?branch=master)](https://travis-ci.org/getkozo/Router)
 
-# What is Kozo?
-Componentized PHP Framework - A framework made up of re-usable building blocks.
+# What is the Kozo Router?
 
-# What is Kozo Web ?
+Kozo Router is a very basic web router.  If you are looking for a router with more features, I would
 
-Kozo Web contains a router and controller
+recommend checking out:
+
+* Slim Framework(http://http://www.slimframework.com/)
+* Lumen Micro Framework(https://lumen.laravel.com/)
+
+
