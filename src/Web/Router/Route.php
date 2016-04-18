@@ -8,7 +8,7 @@ use Kozo\Web\Router\KozoRouterInterface;
  *
  * @author Jason Lam <jasonlam604@gmail.com>
  * @copyright 2016 Jason Lam
- * @package /Kozo/Web/Route
+ * @package /Kozo/Web/Router
  * @license https://github.com/getkozo/Common/blob/master/LICENSE (MIT License)
  */
 class Route
@@ -341,7 +341,7 @@ class Route
      *
      * @return boolean Return true if successful run else false
      */
-    public function execute($requestPath)
+    public function run($requestPath)
     {
         $requestPath = ($requestPath == null) ? "/" : $requestPath;
 

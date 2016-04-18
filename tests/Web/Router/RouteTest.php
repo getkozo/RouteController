@@ -34,14 +34,14 @@ class RouteTest extends PHPUnit_Framework_TestCase
         $route = new Route([
             "GET"
         ], "/", 'App\DummyObject');
-        $this->assertEquals($route->execute("/"), true);
+        $this->assertEquals($route->run("/"), true);
 
         $_SERVER["REQUEST_METHOD"] = "POST";
         $route = new Route([
             "GET",
             "POST"
         ], "/", 'App\DummyObject');
-        $this->assertEquals($route->execute("/"), true);
+        $this->assertEquals($route->run("/"), true);
 
         $_SERVER["REQUEST_METHOD"] = "PUT";
         $route = new Route([
@@ -50,7 +50,7 @@ class RouteTest extends PHPUnit_Framework_TestCase
             "PUT",
             "DELETE"
         ], "/", 'App\DummyObject');
-        $this->assertEquals($route->execute("/"), true);
+        $this->assertEquals($route->run("/"), true);
 
         $_SERVER["REQUEST_METHOD"] = "DELETE";
         $route = new Route([
@@ -59,7 +59,7 @@ class RouteTest extends PHPUnit_Framework_TestCase
             "PUT",
             "DELETE"
         ], "/", 'App\DummyObject');
-        $this->assertEquals($route->execute("/"), true);
+        $this->assertEquals($route->run("/"), true);
     }
 
     public function testMethoNotExist()
@@ -71,7 +71,7 @@ class RouteTest extends PHPUnit_Framework_TestCase
             "PUT",
             "DELETE"
         ], "/", 'App\DummyObject');
-        $this->assertEquals($route->execute("/"), false);
+        $this->assertEquals($route->run("/"), false);
     }
 
     public function testClassCallback()
@@ -81,7 +81,7 @@ class RouteTest extends PHPUnit_Framework_TestCase
             "GET"
         ], "/", "App\DummyObjectTwo");
 
-        $this->assertEquals($route->execute("/"), true);
+        $this->assertEquals($route->run("/"), true);
         $this->expectOutputString("DummyObjectTwo constructor invoked");
     }
 
@@ -94,7 +94,7 @@ class RouteTest extends PHPUnit_Framework_TestCase
             "PUT",
             "DELETE"
         ], "/", "App\AnotherDummyObject", "testMethod");
-        $this->assertEquals($route->execute("/"), true);
+        $this->assertEquals($route->run("/"), true);
         $this->expectOutputString("testMethod invoked");
     }
 
@@ -108,7 +108,7 @@ class RouteTest extends PHPUnit_Framework_TestCase
             "DELETE",
             "PATCH"
         ], "/", 'App\DummyObject');
-        $this->assertEquals($defaultRoute->execute("/"), true);
+        $this->assertEquals($defaultRoute->run("/"), true);
     }
 
     /**
@@ -120,7 +120,7 @@ class RouteTest extends PHPUnit_Framework_TestCase
         $routeUsers = new Route([
             "GET"
         ], "/users", 'App\User', 'listUsers');
-        $this->assertEquals($routeUsers->execute("/users"), true);
+        $this->assertEquals($routeUsers->run("/users"), true);
         $this->expectOutputString("list of users");
     }
 
@@ -133,7 +133,7 @@ class RouteTest extends PHPUnit_Framework_TestCase
         $routeUsers = new Route([
             "POST"
         ], "/users", 'App\User', 'createUser');
-        $this->assertEquals($routeUsers->execute("/users"), true);
+        $this->assertEquals($routeUsers->run("/users"), true);
         $this->expectOutputString("create user");
     }
 
@@ -147,7 +147,7 @@ class RouteTest extends PHPUnit_Framework_TestCase
             "PUT"
         ], "/users/:number", 'App\User', 'updateUser');
         $routeUsers->setAccessApproach(Route::$RESPONSE_APPROACH_GLOBAL_ENV);
-        $this->assertEquals($routeUsers->execute("/users/48593"), true);
+        $this->assertEquals($routeUsers->run("/users/48593"), true);
         $this->expectOutputString("update user 48593");
     }
 
@@ -161,7 +161,7 @@ class RouteTest extends PHPUnit_Framework_TestCase
             "PUT"
         ], "/books/:number", 'App\Books', 'updateBook');
         $routeUsers->setAccessApproach(Route::$RESPONSE_APPROACH_KOZO_INTERFACE);
-        $this->assertEquals($routeUsers->execute("/books/3467"), true);
+        $this->assertEquals($routeUsers->run("/books/3467"), true);
         $this->expectOutputString("update book 3467");
     }
 }
