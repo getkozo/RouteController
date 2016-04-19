@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit 
-	colors="true" 
+	backupGlobals="false"
+    backupStaticAttributes="false"
+    beStrictAboutTestsThatDoNotTestAnything="true"
+    beStrictAboutChangesToGlobalState="true"
+    beStrictAboutOutputDuringTests="true"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    processIsolation="false"
+    stopOnFailure="false"
 	bootstrap="vendor/autoload.php">
 	
   <testsuites>
-    <testsuite name="Kozo Common Tests">
-       <directory>./tests/Web/Controller/</directory>
+    <testsuite name="Kozo Web Router Tests">
        <directory>./tests/Web/Router/</directory>
     </testsuite>
   </testsuites>
