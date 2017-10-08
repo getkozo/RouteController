@@ -1,7 +1,7 @@
 # 構造 - Kōzō
 *(Prounounced "Kouzou"; means "Structure")*
 
-[![Build Status](https://travis-ci.org/getkozo/WebRouter.svg?branch=master)](https://travis-ci.org/getkozo/WebRouter)
+[![Build Status](https://travis-ci.org/jasonlam604/Kozo-WebRouter.svg?branch=master)](https://travis-ci.org/jasonlam604/Kozo-WebRouter)
 
 # What is the Kozo Router?
 
