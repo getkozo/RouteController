@@ -1,8 +1,8 @@
 {
-    "name": "jasonlam604/Kozo-WebRouter",
-    "description": "Simple Web Router",
+    "name": "jasonlam604/kozo-web-router",
+    "description": "Kozo Web Router is exactly that a simple web router",
     "license": "MIT",
-    "homepage": "https://github.com/jasonlam604/Kozo-WebRouter",
+    "homepage": "https://github.com/jasonlam604/kozo-web-router",
     "authors": [
         {
             "name": "Jason Lam",
