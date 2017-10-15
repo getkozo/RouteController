@@ -69,6 +69,25 @@ class Router
     }
 
     /**
+     * Override path extracted from PATH_INFO
+     *
+     * @param string $path
+     *
+     * @throws \InvalidArgumentException Thrown when given string path is not a string or is empty (ie: contains a null)
+     *
+     * @return void
+     *
+     */
+    public function overridePath($path) {
+
+        if(!is_string($path) || empty($path)) {
+            throw new \InvalidArgumentException("Path override is not a string or is empty");
+        } else {
+            $this->path = $path;
+        }
+    }
+
+    /**
      * Determine which route is being called by matching PATH url with defined patterns
      * in each of the route, when match is found then run the route.  Exception is
      * thrown if no route is matched.
