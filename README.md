@@ -5,11 +5,8 @@
 
 # What is the Kozo Router?
 
-Kozo Router is a very basic web router.  If you are looking for a router with more features, I would
+Kozo Router is a very basic web router.
 
-recommend checking out:
+# Developer Guide
 
-* Slim Framework(http://http://www.slimframework.com/)
-* Lumen Micro Framework(https://lumen.laravel.com/)
-
-
+Coming soon.
