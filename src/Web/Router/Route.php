@@ -134,7 +134,7 @@ class Route
         if (empty($urlPattern))
             throw new \InvalidArgumentException("Missing or empty urlPattern");
 
-        $this->responseApproach = self::$RESPONSE_APPROACH_GLOBAL_ENV;
+        $this->responseApproach = self::$RESPONSE_APPROACH_KOZO_INTERFACE;
 
         $this->isPathMatch = false;
 
