@@ -120,6 +120,7 @@ class RouteTest extends PHPUnit_Framework_TestCase
         $routeUsers = new Route([
             "GET"
         ], "/users", 'App\User', 'listUsers');
+        $routeUsers->setAccessApproach(Route::$RESPONSE_APPROACH_GLOBAL_ENV);
         $this->assertEquals($routeUsers->run("/users"), true);
         $this->expectOutputString("list of users");
     }
@@ -133,6 +134,7 @@ class RouteTest extends PHPUnit_Framework_TestCase
         $routeUsers = new Route([
             "POST"
         ], "/users", 'App\User', 'createUser');
+        $routeUsers->setAccessApproach(Route::$RESPONSE_APPROACH_GLOBAL_ENV);
         $this->assertEquals($routeUsers->run("/users"), true);
         $this->expectOutputString("create user");
     }

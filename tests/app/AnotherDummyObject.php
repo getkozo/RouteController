@@ -1,10 +1,11 @@
 <?php
 namespace App;
 
+use Kozo\Web\Router\KozoRouterInterface;
 /**
  * AnotherDummyObject, used for unit testing
  */
-class AnotherDummyObject
+class AnotherDummyObject implements KozoRouterInterface
 {
 
     public function __construct()
@@ -15,5 +16,10 @@ class AnotherDummyObject
     public function testMethod()
     {
         print("testMethod invoked");
+    }
+
+    public function setRequestParameters($data)
+    {
+
     }
 }
